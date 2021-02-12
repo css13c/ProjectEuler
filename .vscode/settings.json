@@ -1,0 +1,14 @@
+{
+    "python.pythonPath": "c:\\Python39\\python.exe",
+    "elixirLS.projectDir": "elixir_solutions",
+    "[elixir]": {
+        "editor.insertSpaces": true,
+        "editor.tabSize": 2,
+        "editor.wordBasedSuggestions": false,
+        "editor.formatOnType": true,
+        "editor.trimAutoWhitespace": false,
+        "files.trimTrailingWhitespace": false,
+        "files.insertFinalNewline": true,
+        "files.trimFinalNewlines": true
+    }
+}

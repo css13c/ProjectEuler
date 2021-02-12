@@ -1,0 +1,12 @@
+{application,elixir_solutions,
+             [{applications,[kernel,stdlib,elixir,logger,math]},
+              {description,"elixir_solutions"},
+              {modules,['Elixir.Guards','Elixir.MapUtils',
+                        'Elixir.PrimeNumbers','Elixir.Problem1',
+                        'Elixir.Problem10','Elixir.Problem11',
+                        'Elixir.Problem12','Elixir.Problem13',
+                        'Elixir.Problem14','Elixir.Problem3',
+                        'Elixir.Problem5','Elixir.Problem6','Elixir.Problem7',
+                        'Elixir.Problem8','Elixir.Problem9']},
+              {registered,[]},
+              {vsn,"0.1.0"}]}.
