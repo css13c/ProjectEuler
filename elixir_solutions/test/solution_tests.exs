@@ -18,4 +18,7 @@ defmodule SolutionTests do
   doctest Problem20
   doctest Problem21
   doctest Problem22
+  doctest Problem23
+  doctest Problem24
+  doctest Problem25
 end

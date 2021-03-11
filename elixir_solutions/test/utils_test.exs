@@ -3,4 +3,6 @@ defmodule UtilsTest do
   doctest PrimeNumbers
   doctest MapUtils
   doctest NumberUtils
+  doctest ListUtils
+  doctest NumberUtils.Fibbonaci
 end

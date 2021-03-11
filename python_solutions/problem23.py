@@ -28,36 +28,16 @@ def proper_divisors(n: int) -> [int]:
         return []
 
     x = 2
-    divisors = [1]
+    divisors = set([1])
     while x * x <= n and n > 1:
         if n % x == 0:
-            divisors += [x, n // x]
+            divisors.add(x)
+            divisors.add(n // x)
 
         x += 1
 
     s = sorted(divisors)
     return s
-
-def sum_of_factors(n: int, prime_list: List[int]) -> int:
-    sum_f = 1
-    p = prime_list[0]
-    i, j = 0
-    while p * p <= n and n > 1 and i < len(prime_list):
-        p = prime_list[i]
-        i += 1
-        if n % p == 0:
-            j = p * p
-            n = n / p
-            while n % p == 0:
-                j *= p
-                n /= p
-
-            sum_f *= ((j - 1) / (p - 1))
-
-    if n > 1:
-        sum_f *= n + 1
-
-    return sum_f - number
 
 def is_abundant(n: int, print_div: bool = False) -> bool:
     """
@@ -71,13 +51,18 @@ def is_abundant(n: int, print_div: bool = False) -> bool:
     divisor_sum = sum(divisors) if divisors else 0
     return divisor_sum > n
 
-def all_sums(l: List[int], max_val: int == None) -> Set[int]:
+def all_sums(l: List[int], max_val: int) -> Set[int]:
     sums = set()
-    for x in filter(lambda a: a < max_val, l):
-        i = 0
-        while i < len(l) and (max_val == None or x + l[i] <= max_val):
-            sums.add(x + l[i])
-            i += 1
+    i = 0
+    while i < len(l):
+        j = i
+        while j < len(l):
+            val = l[i] + l[j]
+            if val > max_val:
+                break
+            sums.add(val)
+            j += 1
+        i += 1
 
     return sums
 
@@ -90,11 +75,8 @@ def solution(n: int = 28123) -> int:
 
     nums = range(1, n+1)
     abundant = list(filter(is_abundant, nums))
-    print(f"Abundant numbers from 1 to {n}: {sorted(abundant)}")
-    sum_of_2_abundants = set(all_sums(abundant, n))
-    print(f"Sums of abundant: {sorted(sum_of_2_abundants)}")
-    fit = set(nums) - sum_of_2_abundants
-    #print(f"Numbers that aren't the sum of two abundant numbers: {fit}")
+    abundant_sums = set(all_sums(abundant, n))
+    fit = set(nums) - abundant_sums
     return fit
 
 if __name__ == "__main__":

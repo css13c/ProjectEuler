@@ -13,10 +13,10 @@ defmodule NumberUtils do
       iex> NumberUtils.divisors(20)
       [1, 2, 4, 5, 10, 20]
   """
-  @spec divisors(pos_integer, pos_integer, list(pos_integer)) :: list(pos_integer)
-  def divisors(n, c \\ 1, div \\ [])
-  def divisors(n, c, div) when c * c > n, do: div |> Enum.sort()
-  def divisors(n, c, div) when rem(n, c) == 0, do: divisors(n, c + 1, div ++ [c, div(n, c)])
+  @spec divisors(pos_integer, pos_integer, MapSet.t(pos_integer)) :: list(pos_integer)
+  def divisors(n, c \\ 1, div \\ MapSet.new)
+  def divisors(n, c, div) when c * c > n, do: div |> Enum.to_list() |> Enum.sort()
+  def divisors(n, c, div) when rem(n, c) == 0, do: divisors(n, c + 1, MapSet.union(div, MapSet.new([c, div(n, c)])))
   def divisors(n, c, div), do: divisors(n, c + 1, div)
 
   @doc """
@@ -33,35 +33,41 @@ defmodule NumberUtils do
   @spec proper_divisors(pos_integer) :: list(pos_integer)
   def proper_divisors(n), do: divisors(n) |> Enum.filter(fn d -> n != d end)
 
-  @doc """
-  Gets the sum of divisors of a number using prime factorization.
-  
-  ## Examples
-      iex> NumberUtils.sum_of_factors_prime(1100)
-      2604
+  defmodule Fibbonaci do
+    @moduledoc """
+    All utilities concerning fibbonaci numbers.
+    """
 
-      iex> NumberUtils.sum_of_factors_prime(28)
-      28
-  """
-  @spec sum_of_factors_prime(pos_integer, list(pos_integer) | nil) :: pos_integer
-  def sum_of_factors_prime(n, prime_list \\ nil)
+    @doc """
+    Gets the **n**th term in the fibbonaci sequence, and returns the term along with
+    a map containing all discovered fibbonaci numbers.
 
-  def sum_of_factors_prime(n, prime_list) when is_nil(prime_list),
-    do: sum_of_factors_prime(n, PrimeNumbers.sieve_of_eratosthenes(n))
+    ## Examples
+        iex> NumberUtils.Fibbonaci.nth(7) |> elem(0)
+        13
 
-  def sum_of_factors_prime(n, prime_list) do
-    PrimeNumbers.prime_factorization_v2(n, prime_list)
-    |> IO.inspect(label: "Prime factorization")
-    |> Enum.reduce(0, fn {x, p}, acc ->
-      acc * prime_factor_factorial_sum(x, p)
-    end)
+        iex> NumberUtils.Fibbonaci.nth(12) |> elem(0)
+        144
+
+        iex> NumberUtils.Fibbonaci.nth(12, %{10 => 55, 11 => 89}) |> elem(0)
+        144
+    """
+    @spec nth(pos_integer, map) :: {pos_integer, map}
+    def nth(n, terms \\ Map.new())
+    def nth(n, terms) when n == 1, do: {1, Map.put_new(terms, 1, 1)}
+    def nth(n, terms) when n == 2, do: {1, Map.put_new(terms, 2, 1) |> Map.put_new(1, 1)}
+    def nth(n, terms) do
+      if Map.has_key?(terms, n - 1) and Map.has_key?(terms, n - 2) do
+        term = terms[n - 1] + terms[n - 2]
+        {term, terms |> Map.put_new(n, term)}
+        #|> IO.inspect(label: "Found(#{n})")
+      else
+        # Only need to find F(n-1), since we can pull F(n-2) from new_terms
+        {prev, new_terms} = nth(n - 1, terms)
+        #|> IO.inspect(label: "Result(#{n})")
+        term = prev + new_terms[n - 2]
+        {term, Map.merge(terms, new_terms) |> Map.put_new(n, term)}
+      end
+    end
   end
-
-  # Converts a prime factor (ex. 2^2) to the sum of its power factorial.
-  # ex. 2^2 = 2^2 + 2^1 + 2^0 = 4 + 2 + 1 = 7
-  defp prime_factor_factorial_sum(n, p, sum \\ 0)
-  defp prime_factor_factorial_sum(n, p, sum) when p == 1, do: sum + n + 1
-
-  defp prime_factor_factorial_sum(n, p, sum),
-    do: prime_factor_factorial_sum(n, p - 1, sum + floor(Math.pow(n, p)))
 end
