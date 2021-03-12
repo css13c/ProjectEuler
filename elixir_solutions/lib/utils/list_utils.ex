@@ -8,6 +8,7 @@ defmodule ListUtils do
   Converts a list to a map, where the index is the key.
  
   ## Examples
+
       iex> ListUtils.to_map([20, 40, 60, 80, 100])
       %{0 => 20, 1 => 40, 2 => 60, 3 => 80, 4 => 100}
 
@@ -23,6 +24,7 @@ defmodule ListUtils do
   Gets all permutations of items in list.
 
   ## Examples
+
       iex> ListUtils.permutations([0, 1, 2])
       [[0, 1, 2], [0, 2, 1], [1, 0, 2], [1, 2, 0], [2, 0, 1], [2, 1, 0]]
 

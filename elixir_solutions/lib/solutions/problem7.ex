@@ -13,10 +13,9 @@ defmodule Problem7 do
       iex> Problem7.solution(6)
       13
   """
-  @spec solution(pos_integer()) :: pos_integer()
+  @spec solution(pos_integer) :: pos_integer
   def solution(n \\ 10_001, prime_list \\ nil)
   def solution(n, prime_list) when prime_list == nil, do: solution(n, Enum.to_list(2..(n * 2)))
-
   def solution(n, prime_list) do
     new_list = PrimeNumbers.sieve_of_eratosthenes(prime_list)
 

@@ -23,20 +23,19 @@ defmodule Problem25 do
   >
   > What is the index of the first term in the Fibonacci sequence to contain 1000 digits?
   """
-  alias NumberUtils.Fibbonaci, as: Fibonnaci
 
   @doc """
   Finds the index of the first term in the Fibbonaci sequence containing
   **n** digits.
 
   ## Examples
+
       iex> Problem25.solution(3)
       12
   """
   @spec solution(pos_integer, map) :: pos_integer
   def solution(n \\ 1000, fib \\ %{}, index \\ 1) do
-    #IO.inspect(fib, label: "I: #{index}, Fib")
-    {val, new_fib} = Fibonnaci.nth(index, fib)
+    {val, new_fib} = Fibbonaci.nth(index, fib)
     digits = Integer.digits(val) |> length()
     cond do
       digits >= n - 3 and digits < n -> solution(n, new_fib, index + 1)

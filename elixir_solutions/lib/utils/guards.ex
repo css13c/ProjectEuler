@@ -4,7 +4,7 @@ defmodule Guards do
   """
 
   @doc """
-  Checks if `x` is even
+  Checks if `x` is even.
   """
   defguard is_even(x) when rem(x, 2) == 0
 end

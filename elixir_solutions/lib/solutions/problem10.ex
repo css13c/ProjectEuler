@@ -5,6 +5,9 @@ defmodule Problem10 do
   > Find the sum of all primes below two million.
   """
 
+  @doc """
+  Finds the sum of all primes between 1 and maxval.
+  """
   @spec solution(pos_integer) :: pos_integer
   def solution(maxVal \\ 2_000_000) do
     range = 1..maxVal

@@ -33,12 +33,12 @@ defmodule Problem8 do
   Finds the greatest product of the `adjacentDigit` number of adjacent digits.
 
   ## Examples
+
       iex> Problem8.solution(4)
       5832
   """
   @spec solution(pos_integer) :: pos_integer
-  def solution(digitCount \\ 13) when is_integer(digitCount) and digitCount > 0,
-    do: p_solution(digitCount, 0, 0)
+  def solution(digitCount \\ 13), do: p_solution(digitCount, 0, 0)
 
   defp p_solution(adjacentDigits, index, maxProduct) when index + adjacentDigits > 1000,
     do: maxProduct

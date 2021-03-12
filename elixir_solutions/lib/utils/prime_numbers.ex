@@ -9,6 +9,7 @@ defmodule PrimeNumbers do
   Numbers are co-prime if they share no common prime factors.
 
   ## Examples
+
       iex> PrimeNumbers.are_coprime(2, 3)
       true
 
@@ -27,6 +28,7 @@ defmodule PrimeNumbers do
   Gets the unique prime factors of a given number.
 
   ## Examples
+
       iex> PrimeNumbers.unique_prime_factors(20)
       #MapSet<[2, 5]>
 
@@ -146,11 +148,16 @@ defmodule PrimeNumbers do
   """
   @spec sieve_of_eratosthenes(term) :: list(pos_integer)
   def sieve_of_eratosthenes(limit) when is_integer(limit), do: p_sieve(0, 2..limit, limit)
+  def sieve_of_eratosthenes(l) when is_list(l) do
+    val_list = Enum.filter(l, &(&1 > 1)) |> Enum.to_list()
+    p_sieve(0, val_list, List.last(val_list))
+  end
 
-  def sieve_of_eratosthenes(values = %Range{}) do
+  def sieve_of_eratosthenes(%Range{} = values) do
     val_list = Enum.filter(values, &(&1 > 1)) |> Enum.to_list()
     p_sieve(0, val_list, List.last(val_list))
   end
+  
 
   @spec p_sieve(integer, Enum.t(), pos_integer) :: [pos_integer]
   defp p_sieve(n, numbers, maxVal) do

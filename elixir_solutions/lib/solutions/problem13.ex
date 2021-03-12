@@ -208,10 +208,10 @@ defmodule Problem13 do
   ]
 
   @doc """
-  Finds the first ten digits of the sum of `@numbers`.
+  Finds the first `n` digits of the sum of `@numbers`.
   """
   @spec solution() :: pos_integer
-  def solution() do
-    Enum.sum(@numbers) |> Integer.digits() |> Enum.take(10) |> Integer.undigits()
+  def solution(n \\ 10) do
+    Enum.sum(@numbers) |> Integer.digits() |> Enum.take(n) |> Integer.undigits()
   end
 end

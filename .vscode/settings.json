@@ -1,5 +1,5 @@
 {
-    "python.pythonPath": "c:\\Python39\\python.exe",
+    "python.pythonPath": "C:\\Python39\\python.exe",
     "elixirLS.projectDir": "elixir_solutions",
     "[elixir]": {
         "editor.insertSpaces": true,

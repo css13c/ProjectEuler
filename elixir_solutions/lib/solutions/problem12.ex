@@ -55,7 +55,6 @@ defmodule Problem12 do
   """
   @spec solution(pos_integer, pos_integer) :: pos_integer
   def solution(number_of_factors \\ 500, x \\ 1)
-
   def solution(number_of_factors, x) do
     n = round(x * (x + 1) / 2)
     if divisor_count(n) > number_of_factors, do: n, else: solution(number_of_factors, x + 1)

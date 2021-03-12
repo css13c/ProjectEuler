@@ -13,6 +13,7 @@ defmodule Problem20 do
   Finds the sum of digits for `n!`
 
   ## Example
+
       iex> Problem20.solution(10)
       27
   """

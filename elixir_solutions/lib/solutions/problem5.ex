@@ -13,9 +13,8 @@ defmodule Problem5 do
       iex> Problem5.solution(10)
       2520
   """
-  @spec solution(pos_integer()) :: pos_integer()
+  @spec solution(pos_integer) :: pos_integer
   def solution(max \\ 20)
-
   def solution(max) do
     Enum.reduce(1..max, [], fn x, acc ->
       acc ++ [PrimeNumbers.prime_factorization(x)]
@@ -26,11 +25,9 @@ defmodule Problem5 do
       Map.update(acc, val, mult, &max(&1, mult))
     end)
     |> Map.to_list()
-    # |> IO.inspect(label: "Factor List")
     |> Enum.reduce(1, fn x, acc ->
       {val, mult} = x
       acc * round(:math.pow(val, mult))
-      # |> IO.inspect( label: "Current Value")
     end)
   end
 end

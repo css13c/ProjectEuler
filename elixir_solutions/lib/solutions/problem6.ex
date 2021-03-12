@@ -17,28 +17,32 @@ defmodule Problem6 do
       iex> Problem6.sum_of_squares(1..10)
       385
   """
-  @spec sum_of_squares([pos_integer()]) :: pos_integer()
+  @spec sum_of_squares(list(pos_integer)) :: pos_integer
   def sum_of_squares(range), do: Enum.reduce(range, &(&1 * &1 + &2))
 
   @doc """
   Finds the square of the sum for a given list of numbers.
 
   ## Examples
+
       iex> Problem6.square_of_sum(1..10)
       3025
   """
-  @spec square_of_sum([pos_integer()]) :: pos_integer()
+  @spec square_of_sum(list(pos_integer)) :: pos_integer
   def square_of_sum(range), do: round(:math.pow(Enum.reduce(range, &(&1 + &2)), 2))
 
   @doc """
   Finds the difference between the sum of the squares and the square of the sum for a given list of numbers
 
   ## Examples
+
       iex> Problem6.solution(1..10)
       2640
   """
-  @spec solution([pos_integer()]) :: pos_integer()
-  def solution(range) do
+  @spec solution(Range.t | list(pos_integer)) :: pos_integer
+  def solution(range \\ 1..100)
+  def solution(%Range{} = range), do: solution(range |> Enum.to_list())
+  def solution(range) when is_list(range) do
     square_of_sum(range) - sum_of_squares(range)
   end
 end

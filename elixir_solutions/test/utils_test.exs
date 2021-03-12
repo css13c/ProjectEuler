@@ -4,5 +4,5 @@ defmodule UtilsTest do
   doctest MapUtils
   doctest NumberUtils
   doctest ListUtils
-  doctest NumberUtils.Fibbonaci
+  doctest Fibbonaci
 end

@@ -58,7 +58,6 @@ defmodule Problem11 do
 
   defp max_search(m, n) do
     # Get max of down 4, right 4, down-right 4, and down-left 4
-    # IO.puts("(#{m}, #{n}) = #{grid_fetch(m, n)}")
     todo =
       cond do
         m <= 16 and n >= 3 and n <= 16 ->
@@ -101,13 +100,12 @@ defmodule Problem11 do
   @doc """
   Finds the largest product of 4 consecutive numbers in the given grid in any direction
   """
-  @spec solution(integer, integer, [[integer]]) :: pos_integer
+  @spec solution(integer, integer, list(list(integer))) :: pos_integer
   def solution(m \\ 0, n \\ 0, result \\ [])
   def solution(m, _, result) when m == 20, do: Enum.max(Enum.map(result, &Enum.max(&1)))
   def solution(m, n, result) when n == 0, do: solution(m, n + 1, result ++ [[max_search(m, n)]])
 
   def solution(m, n, result) when n == 19,
-    # |> IO.inspect(label: "Finished Row"))
     do: solution(m + 1, 0, List.update_at(result, m, &(&1 ++ [max_search(m, n)])))
 
   def solution(m, n, result),

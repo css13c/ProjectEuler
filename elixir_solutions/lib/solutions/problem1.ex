@@ -15,7 +15,7 @@ defmodule Problem1 do
         iex> Problem1.solution(10)
         23
   """
-  @spec solution(pos_integer()) :: integer()
+  @spec solution(pos_integer) :: integer
   def solution(max \\ 1000) do
     Enum.filter(3..(max - 1), &(rem(&1, 3) == 0 || rem(&1, 5) == 0))
     |> Enum.reduce(fn x, acc -> acc + x end)

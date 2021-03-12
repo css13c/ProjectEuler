@@ -16,6 +16,7 @@ defmodule Problem24 do
   Finds the nth lexicographic permutation of the given digits.
   
   ## Examples
+
       iex> Problem24.solution([0, 1, 2], 4)
       "120"
   """

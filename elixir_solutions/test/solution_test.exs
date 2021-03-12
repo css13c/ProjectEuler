@@ -1,4 +1,4 @@
-defmodule SolutionTests do
+defmodule SolutionTest do
   @moduledoc """
   Holds all doctests for solutions that don't need specific tests.
   Any specific tests need to go into the "solution" folder.

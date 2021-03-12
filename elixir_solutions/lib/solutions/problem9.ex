@@ -26,7 +26,7 @@ defmodule Problem9 do
   @spec euclids_formula(pos_integer, pos_integer) :: [pos_integer]
   def euclids_formula(m, n) when euclids_continue(m, n) do
     if PrimeNumbers.are_coprime(m, n) do
-      [round(Math.pow(n, 2) - Math.pow(m, 2)), 2 * m * n, round(Math.pow(n, 2) + Math.pow(m, 2))]
+      [round(:math.pow(n, 2) - :math.pow(m, 2)), 2 * m * n, round(:math.pow(n, 2) + :math.pow(m, 2))]
     else
       raise ArgumentError, message: "Euclid's fail due to non co-primality"
     end

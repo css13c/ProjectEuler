@@ -7,6 +7,7 @@ defmodule NumberUtils do
   Gets the divisors of **n** and returns them in ascending order.
 
   ## Examples
+
       iex> NumberUtils.divisors(10)
       [1, 2, 5, 10]
 
@@ -24,6 +25,7 @@ defmodule NumberUtils do
   of a number and returns them in ascending order.
 
   ## Examples
+
       iex> NumberUtils.proper_divisors(220)
       [1, 2, 4, 5, 10, 11, 20, 22, 44, 55, 110]
 
@@ -32,42 +34,4 @@ defmodule NumberUtils do
   """
   @spec proper_divisors(pos_integer) :: list(pos_integer)
   def proper_divisors(n), do: divisors(n) |> Enum.filter(fn d -> n != d end)
-
-  defmodule Fibbonaci do
-    @moduledoc """
-    All utilities concerning fibbonaci numbers.
-    """
-
-    @doc """
-    Gets the **n**th term in the fibbonaci sequence, and returns the term along with
-    a map containing all discovered fibbonaci numbers.
-
-    ## Examples
-        iex> NumberUtils.Fibbonaci.nth(7) |> elem(0)
-        13
-
-        iex> NumberUtils.Fibbonaci.nth(12) |> elem(0)
-        144
-
-        iex> NumberUtils.Fibbonaci.nth(12, %{10 => 55, 11 => 89}) |> elem(0)
-        144
-    """
-    @spec nth(pos_integer, map) :: {pos_integer, map}
-    def nth(n, terms \\ Map.new())
-    def nth(n, terms) when n == 1, do: {1, Map.put_new(terms, 1, 1)}
-    def nth(n, terms) when n == 2, do: {1, Map.put_new(terms, 2, 1) |> Map.put_new(1, 1)}
-    def nth(n, terms) do
-      if Map.has_key?(terms, n - 1) and Map.has_key?(terms, n - 2) do
-        term = terms[n - 1] + terms[n - 2]
-        {term, terms |> Map.put_new(n, term)}
-        #|> IO.inspect(label: "Found(#{n})")
-      else
-        # Only need to find F(n-1), since we can pull F(n-2) from new_terms
-        {prev, new_terms} = nth(n - 1, terms)
-        #|> IO.inspect(label: "Result(#{n})")
-        term = prev + new_terms[n - 2]
-        {term, Map.merge(terms, new_terms) |> Map.put_new(n, term)}
-      end
-    end
-  end
 end
